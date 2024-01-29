@@ -1,17 +1,18 @@
 const router = require('express').Router();
 
 const postManager = require('../managers/postManager');
+const { isAuth } = require('../middleware/authMiddleware');
 
 router.get('/catalog', async (req, res) => {
     const posts = await postManager.getAll().lean();
-    res.render('posts/catalog', {posts});
+    res.render('posts/catalog', { posts });
 });
 
-router.get('/create', (req, res) => {
+router.get('/create', isAuth, (req, res) => {
     res.render('posts/create');
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create', isAuth, async (req, res) => {
     const postData = {
         ...req.body,
         owner: req.user._id
@@ -38,7 +39,7 @@ router.get('/details/:postId', async (req, res) => {
     res.render('posts/details', { postData, isOwner, isUser, hasVoted, votesCount, votersList });
 });
 
-router.get('/vote/:postId', async (req, res) => {
+router.get('/vote/:postId', isAuth, async (req, res) => {
     const id = req.params.postId;
     const userId = req.user._id;
 
@@ -47,7 +48,7 @@ router.get('/vote/:postId', async (req, res) => {
     res.redirect(`/posts/details/${id}`)
 });
 
-router.get('/edit/:postId', async (req, res) => {
+router.get('/edit/:postId', isAuth, async (req, res) => {
     const id = req.params.postId;
 
     const postData = await postManager.getOne(id).lean();
@@ -55,7 +56,7 @@ router.get('/edit/:postId', async (req, res) => {
     res.render('posts/edit', { postData });
 });
 
-router.post('/edit/:postId', async (req, res) => {
+router.post('/edit/:postId', isAuth, async (req, res) => {
     const id = req.params.postId;
     const postData = req.body;
 
@@ -64,7 +65,7 @@ router.post('/edit/:postId', async (req, res) => {
     res.redirect(`/posts/details/${id}`);
 });
 
-router.get('/delete/:postId', async (req, res) => {
+router.get('/delete/:postId', isAuth, async (req, res) => {
     const id = req.params.postId;
 
     await postManager.getOneAndDelete(id);
