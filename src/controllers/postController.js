@@ -62,6 +62,14 @@ router.post('/edit/:postId', async (req, res) => {
     await postManager.getOneAndUpdate(id, postData);
 
     res.redirect(`/posts/details/${id}`);
+});
+
+router.get('/delete/:postId', async (req, res) => {
+    const id = req.params.postId;
+
+    await postManager.getOneAndDelete(id);
+
+    res.redirect('/posts/catalog');
 })
 
 module.exports = router;

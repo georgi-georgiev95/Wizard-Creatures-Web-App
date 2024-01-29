@@ -19,7 +19,7 @@
               <!-- Only for registered user and author of the post -->
               {{#if isOwner}}
                 <a href="/posts/edit/{{postData._id}}" class="edit-btn">Edit</a>
-                <a href="#" class="del-btn">Delete</a>
+                <a href="/posts/delete/{{postData._id}}" class="del-btn">Delete</a>
                 {{else}}
                   {{#if hasVoted}}
                   <!-- logged in user who has already voted-->
