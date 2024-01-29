@@ -5,7 +5,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/404', (req, res) => {
-    res.render('partials/404');
+    res.render('404');
 });
 
 module.exports = router;
