@@ -2,8 +2,9 @@ const router = require('express').Router();
 
 const postManager = require('../managers/postManager');
 
-router.get('/catalog', (req, res) => {
-    res.render('posts/catalog');
+router.get('/catalog', async (req, res) => {
+    const posts = await postManager.getAll().lean();
+    res.render('posts/catalog', {posts});
 });
 
 router.get('/create', (req, res) => {
