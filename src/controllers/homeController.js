@@ -1,7 +1,11 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-    res.send('Hello from Express!');
+    res.render('partials/home');
 })
+
+router.get('/404', (req, res) => {
+    res.render('partials/404');
+});
 
 module.exports = router;

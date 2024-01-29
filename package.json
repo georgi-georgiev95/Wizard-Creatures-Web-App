@@ -1,19 +1,23 @@
 {
-  "name": "wizard-creatures-web-app",
+  "name": "electronics_solution",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
+  "description": "1. Initialize project\r 2. Install & setup express\r     * add routes\r     * add body parser\r     * add static route\r 3. Add view engine: express-handlebars\r     * register with express\r     * add views folder\r     * add home template \r     * add main layout\r     * add partial template folder\r 4. Add home controller\r     * add controller to routes\r 5. Connect database\r     * set strict query / deprecation warning\r 6. Authentication\r     * fix html links in layout\r     * add auth controller\r     * add reigster page\r     * add login page\r 7. Add user model\r 8. Add auth service\r 9. Install bcrypt and cookie-parser and configure\r 10. Register user\r     * validate repeat password\r     * check if user exists\r     * use bcrypt to hash password\r 11. Login user\r     * check if user exists\r     * check if password is valid\r 12. Generate jwt token\r     * OPTIONAL: use util.promisify to use async\r     * generate token with payload\r     * add token to cookie\r 13. Add authentication middleware\r     * add decoded token to request\r     * use authentication middleware\r 14. Logout\r 15. Authorization middleware\r 16. Dynamic navigation\r 17. Error handling (local error handling)\r 18. Add error notification to main layout\r 19. Login automatically after register\r 20. Parse errors",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
-    "express-handlebars": "^7.1.2"
+    "express-handlebars": "^7.1.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.4"
   },
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.2"
   }
 }

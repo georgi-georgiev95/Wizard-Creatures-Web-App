@@ -1,11 +1,9 @@
-const express = require('express');
+const app = require('./config/expressConfig');
+const handlebarsConfig = require('./config/handlebarsConfig');
+const { PORT } = require('./utils/const');
+const mongoose = require('./config/dbConfig');
 
-const expressConfig = require('./config/expressConfig');
-const { PORT } = require('./helpers/constants');
-const app = express();
+mongoose();
+handlebarsConfig(app);
 
-expressConfig(app);
-
-
-app.listen(PORT, () => console.log(`App is listening on port ${PORT}`));
-
+app.listen(PORT, console.log(`App is listening on port ${PORT}`));
