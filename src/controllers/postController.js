@@ -45,6 +45,23 @@ router.get('/vote/:postId', async (req, res) => {
     await postManager.vote(id, userId);
 
     res.redirect(`/posts/details/${id}`)
+});
+
+router.get('/edit/:postId', async (req, res) => {
+    const id = req.params.postId;
+
+    const postData = await postManager.getOne(id).lean();
+
+    res.render('posts/edit', { postData });
+});
+
+router.post('/edit/:postId', async (req, res) => {
+    const id = req.params.postId;
+    const postData = req.body;
+
+    await postManager.getOneAndUpdate(id, postData);
+
+    res.redirect(`/posts/details/${id}`);
 })
 
 module.exports = router;
