@@ -26,7 +26,7 @@
                   <p class="thanks-for-vote">Thanks For Voting</p>
                   {{else}}
                   <!-- logged in users, who have not yet voted-->
-                  <a href="#" class="vote-up">Vote</a>
+                  <a href="/posts/vote/{{postData._id}}" class="vote-up">Vote</a>
                   {{/if}}
               {{/if}}
             </div>
@@ -46,15 +46,17 @@
           <h1>Votes</h1>
           <div class="card_vote">
             <!-- Show the rating of votes, if there are no votes yet, the number must be 0. -->
-            <p class="PV">Total rating of votes: 0</p>
+            <p class="PV">Total rating of votes: {{votesCount}}</p>
           </div>
+          {{#if votersList}}
           <!-- If there are already people who have cast their vote for the post, separate their emails with a comma and a space ", " -->
-          <!-- <p class="disc">People who voted for the post - alex@gmai.com, petar@gmail.com, petq@gmail.com</p>-->
-
-          <!-- If not display: -->
+          <p class="disc">People who voted for the post - {{votersList}}</p>
+          {{else}}
           <p class="disc">
+          <!-- If not display: -->
             People who voted for the post - No one has voted yet.
           </p>
+          {{/if}}
         </div>
       </div>
     </div>

@@ -29,12 +29,22 @@ router.get('/details/:postId', async (req, res) => {
     let isOwner = req.user?._id == postData.owner._id;
     let isUser = req.user?._id;
     let hasVoted = postData.votes.filter(x => x._id == req.user._id).length !== 0 ? true : false;
+    let votesCount = postData.votes.length
 
-    console.log(isOwner);
-    console.log(isUser);
-    console.log(hasVoted);
+    let votersArr = [];
+    postData.votes.forEach(x => votersArr.push(x.email));
+    let votersList = votersArr.join(', ');
 
-    res.render('posts/details', { postData, isOwner, isUser, hasVoted });
+    res.render('posts/details', { postData, isOwner, isUser, hasVoted, votesCount, votersList });
+});
+
+router.get('/vote/:postId', async (req, res) => {
+    const id = req.params.postId;
+    const userId = req.user._id;
+
+    await postManager.vote(id, userId);
+
+    res.redirect(`/posts/details/${id}`)
 })
 
 module.exports = router;
