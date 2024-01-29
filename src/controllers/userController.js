@@ -3,6 +3,7 @@ const userManager = require('../managers/userManager');
 
 const { COOKIE_NAME } = require('../utils/const');
 const { getErrorMessage } = require('../utils/errHelpers');
+const postManager = require('../managers/postManager');
 
 router.get('/login', (req, res) => {
     res.render('users/login');
@@ -42,5 +43,10 @@ router.get('/logout', (req, res) => {
     
     res.redirect('/');
 });
+
+router.get('/profile', async (req, res) => {
+    const userPosts = await postManager.getUserPosts(req.user._id).lean();
+    res.render('users/profile', {userPosts});
+})
 
 module.exports = router;

@@ -11,3 +11,5 @@ exports.vote = (id, userId) => Post.findByIdAndUpdate(id, { $push: { votes: user
 exports.getOneAndUpdate = (id, postData) => Post.findByIdAndUpdate(id, postData);
 
 exports.getOneAndDelete = (id) => Post.findByIdAndDelete(id);
+
+exports.getUserPosts = (userId) => Post.find({ owner: userId });
